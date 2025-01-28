@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Contador Eléctrico</title>
+    <link rel="stylesheet" href="../css estancias/Css_estancias.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <h1>Salon</h1>
+        <div class="cabecera">
+            <button type="button" class="estancia-btn"><a href="../Inicio.html" class="btn-tpg">Volver a Inicio</a></button>
+            <button type="button" class="estancia-btn">Mi Cuenta</a></button>
+        </div>
+    </header>
+    <main class="main-content">
+        <section class="cajon_electrodomesticos">
+            <article class="appliance-box">
+                <h2>Añadir Electrodoméstico</h2>
+                <form id="appliance-form-1" class="appliance-form">
+                    <label for="name" class="texto">Nombre del Electrodoméstico:</label>
+                    <input type="text" id="name-1" class="input-field" required>
+
+                    <label for="power" class="texto">Potencia (W):</label>
+                    <input type="number" id="power-1" class="input-field" required>
+
+                    <label for="hours" class="texto">Temporizador:</label>
+                    <input type="number" id="hours-1" class="input-field" required>
+
+                    <button type="submit" class="submit-button">Añadir</button>
+                    <button type="submit" class="submit-button">on/off</button>
+                </form>
+            </article>
+            <br>
+            <article class="appliance-box">
+                <h2>Añadir Electrodoméstico</h2>
+                <form id="appliance-form-2" class="appliance-form">
+                    <label for="name" class="texto">Nombre del Electrodoméstico:</label>
+                    <input type="text" id="name-2" class="input-field" required>
+
+                    <label for="power" class="texto">Potencia (W):</label>
+                    <input type="number" id="power-2" class="input-field" required>
+
+                    <label for="hours" class="texto">Temporizador:</label>
+                    <input type="number" id="hours-2" class="input-field" required>
+
+                    <button type="submit" class="submit-button">Añadir</button>
+                    <button type="submit" class="submit-button">on/off</button>
+                </form>
+            </article>
+            <br>
+            <article class="appliance-box">
+                <h2>Añadir Electrodoméstico</h2>
+                <form id="appliance-form-3" class="appliance-form">
+                    <label for="name" class="texto">Nombre del Electrodoméstico:</label>
+                    <input type="text" id="name-3" class="input-field" required>
+
+                    <label for="power" class="texto">Potencia (W):</label>
+                    <input type="number" id="power-3" class="input-field" required>
+
+                    <label for="hours" class="texto">Temporizador:</label>
+                    <input type="number" id="hours-3" class="input-field" required>
+
+                    <button type="submit" class="submit-button">Añadir</button>
+                    <button type="submit" class="submit-button">on/off</button>
+                </form>
+            </article>
+        </section>
+
+        <section id="appliance-list" class="appliance-list">
+            <h2>Lista de Electrodomésticos</h2>
+            <table class="appliance-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Potencia (W)</th>
+                        <th>Horas</th>
+                        <th>Consumo Diario (kWh)</th>
+                    </tr>
+                </thead>
+                <tbody id="appliance-table-body">
+
+
+                    <!-- Aquí se añadirán las filas dinámicamente -->
+
+
+                </tbody>
+            </table>
+        </section>
+
+        <section id="appliance-usage" class="appliance-usage">
+            <h2>Uso de Electrodoméstico</h2>
+            <p>Aquí se detallará el uso de cada electrodoméstico en los últimos días.</p>
+        </section>
+
+        <section id="total-cost" class="total-cost">
+            <h2>Costo Diario Total</h2>
+            <p id="total-cost-display">Cargando precios...</p>
+        </section>
+
+        <section id="settings" class="settings">
+            <h2>Configuración</h2>
+            <form id="settings-form" class="settings-form">
+                <label for="tariff">Tarifa por kWh (€):</label>
+                <input type="number" id="tariff" class="input-field" step="0.01" required>
+
+                <button type="submit" class="secboton">Guardar Configuración</button>
+            </form>
+        </section>
+
+        <section id="consumption-chart" class="consumption-chart">
+            <h2>Gráfica de Consumo</h2>
+            <canvas id="consumption-canvas"></canvas>
+        </section>
+    </main>
+    <script src="Cocina.js"></script>
+</body>
+
+</html>

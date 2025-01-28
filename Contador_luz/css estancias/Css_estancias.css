@@ -1,0 +1,124 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.main-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+.main-content {
+    padding: 1em;
+}
+
+h1,
+h2 {
+    margin: 0;
+    padding: 0.5em 0;
+}
+
+h2 {
+    border-bottom: 2px solid #4CAF50;
+}
+
+.cajon_electrodomesticos {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+
+.appliance-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 33.33%;
+    
+}
+
+.texto {
+    display: block;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    font-weight: bold;
+
+}
+
+
+
+.input-field,
+.textarea-field {
+    width: calc(100% - 20px);
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 100px;
+    
+
+}
+
+.secboton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #328936;
+}
+
+.appliance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+.appliance-table th,
+.appliance-table td {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+}
+
+.appliance-table thead {
+    background-color: #f2f2f2;
+}
+
+.total-cost-display {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+.settings-form,
+.maintenance-form,
+.settings {
+    margin-top: 1em;
+}

@@ -1,0 +1,68 @@
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #e0f7fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #ffffff;
+    width: 65%;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.estancias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.estancia-btn {
+    display: block;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    background: #4CAF50;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: 1s;
+}
+
+.estancia-btn:hover {
+    background: #328936;
+    font-size: 24px;
+    width: 180px;
+    height: 180px;
+    transition: 1s;
+    transform: scale(1);
+    
+}
+
+.btn-tpg {
+    text-decoration: none;
+    color: white;
+}
