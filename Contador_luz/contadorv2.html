@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Electrodomésticos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .habitacion { border: 2px solid #ccc; padding: 15px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        .on { background-color: lightgreen; }
+    </style>
+</head>
+<body>
+    <h1>Control de Electrodomésticos</h1>
+    <div id="habitaciones"></div>
+    <button onclick="agregarHabitacion()">Agregar Habitación</button>
+
+    <script>
+        function agregarHabitacion() {
+            const contenedor = document.getElementById("habitaciones");
+            const id = document.querySelectorAll(".habitacion").length + 1;
+            const div = document.createElement("div");
+            div.className = "habitacion";
+            div.innerHTML = `
+                <h2>Habitación ${id}</h2>
+                <label>Precio kWh: <input type="number" step="0.01" id="precio${id}" value="0.15"></label>
+                <h3>Agregar Electrodoméstico</h3>
+                <label>Nombre: <input type="text" id="nombre${id}"></label>
+                <label>Potencia (W): <input type="number" id="potencia${id}"></label>
+                <button onclick="agregarElectrodomestico(${id})">Añadir</button>
+                <h3>Electrodomésticos</h3>
+                <table id="tabla${id}">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Potencia (W)</th>
+                        <th>Tiempo Encendido</th>
+                        <th>Costo</th>
+                        <th>Acción</th>
+                    </tr>
+                </table>
+            `;
+            contenedor.appendChild(div);
+        }
+
+        function agregarElectrodomestico(id) {
+            const nombre = document.getElementById(`nombre${id}`).value;
+            const potencia = parseFloat(document.getElementById(`potencia${id}`).value);
+            if (!nombre || isNaN(potencia) || potencia <= 0) return;
+
+            const tabla = document.getElementById(`tabla${id}`);
+            const fila = document.createElement("tr");
+            let encendido = false;
+            let tiempoInicio = 0;
+            let intervalo;
+
+            fila.innerHTML = `
+                <td>${nombre}</td>
+                <td>${potencia}</td>
+                <td class="tiempo">0s</td>
+                <td class="costo">$0.00</td>
+                <td><button class="toggle">Encender</button></td>
+            `;
+
+            const boton = fila.querySelector(".toggle");
+            boton.addEventListener("click", () => {
+                const precioKwH = parseFloat(document.getElementById(`precio${id}`).value);
+                const tiempoElem = fila.querySelector(".tiempo");
+                const costoElem = fila.querySelector(".costo");
+                
+                if (!encendido) {
+                    tiempoInicio = Date.now();
+                    intervalo = setInterval(() => {
+                        let tiempoSeg = Math.floor((Date.now() - tiempoInicio) / 1000);
+                        let consumoKWh = (potencia / 1000) * (tiempoSeg / 3600);
+                        let costo = (consumoKWh * precioKwH).toFixed(2);
+                        tiempoElem.textContent = `${tiempoSeg}s`;
+                        costoElem.textContent = `$${costo}`;
+                    }, 1000);
+                    boton.textContent = "Apagar";
+                    fila.classList.add("on");
+                } else {
+                    clearInterval(intervalo);
+                    boton.textContent = "Encender";
+                    fila.classList.remove("on");
+                }
+                encendido = !encendido;
+            });
+
+            tabla.appendChild(fila);
+        }
+    </script>
+</body>
+</html>

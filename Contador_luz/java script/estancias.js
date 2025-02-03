@@ -6,6 +6,14 @@ const totalCostDisplay = document.getElementById('total-cost-display');
 let appliances = [];
 let kwhPrice = 0;
 
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', function() {
+        menu.classList.toggle('active');
+    });
+});
 // Obtener precios de la API eSios
 async function fetchElectricityPrice() {
     const apiKey = "TU_API_KEY"; // Sustituye por tu clave
@@ -30,6 +38,8 @@ async function fetchElectricityPrice() {
         totalCostDisplay.textContent = 'Error al cargar los precios.';
     }
 }
+
+
 
 // Añadir electrodoméstico
 applianceForm.addEventListener('submit', (event) => {
