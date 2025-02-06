@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.main-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    text-align: center;
+}
+
+.est_cabecera {
+    background-color: white;
+    color: #4CAF50;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 10px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    transition: 1s;
+    
+}
+
+.est_cabecera:hover {
+    background-color: rgba(255, 255, 255, 0.828);
+    transition: 1s;
+  
+
+}
+
+.est_reset {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 10px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    transition: 1s;
+}
+
+.est_reset:hover {
+    background-color: #89f28c;
+    transition: 1s;
+}
+
+.main-content {
+    padding: 16px;
+}
+
+.habitaciones-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+.appliance-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 0 0 calc(50% - 10px);
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+    .appliance-box {
+        flex: 0 0 calc(50% - 20px);
+        
+    }
+}
+
+@media (max-width: 768px) {
+    .appliance-box {
+        flex: 0 0 100%;
+        
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #4CAF50;
+}
+
+
+h1 {
+    margin: 0;
+    padding: 8px 0;
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+
+h2{
+    margin: 0;
+    padding: 8px 0;
+    letter-spacing: 2px;
+    font-size: 20px;
+
+}
+
+h2 {
+    border-bottom: 2px solid #4CAF50;
+}
+
+.texto {
+    display: block;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    font-weight: bold;
+    
+}
+
+.input-field,
+.textarea-field {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 100px;
+}
+
+.secboton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #328936;
+}
+
+.appliance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.appliance-table th,
+.appliance-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.appliance-table thead {
+    background-color: #f2f2f2;
+}
+
+.total-cost-display {
+    font-size: 19.2px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+}
+
+canvas {
+    max-width: 100%;
+}
+
+.settings-form,
+.maintenance-form,
+.settings {
+    margin-top: 16px;
+}
+
+.on {
+    background-color: #ccffcc;
+}
+
+.total-cost-display{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.total-coste-habitacion {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 3px;
+    text-align: right;
+
+}
+   
