@@ -12,13 +12,16 @@
     <header class="main-header">
         <h1>Control de Electrodomésticos</h1>
         <button class="est_cabecera" onclick="agregarHabitacion()">Agregar Habitación</button>
-      
     </header>
     <div class="main-content">
         <div id="habitaciones" class="habitaciones-container"></div>
         <div class="appliance-box">
             <h2>Total General</h2>
-            <div id="totalCoste" class="total-cost-display">Importe Total Facturación: 0.00 €</div>
+            <div class="total-container">
+                <div id="totalCoste" class="total-cost-display">Base imponible: 0.00 €</div>
+                <div id="ivaCoste" class="iva-cost-display">IVA (21%): 0.00 €</div>
+                <div id="totalConIva" class="total-con-iva-display">Total con IVA repercutido: 0.00 €</div>
+            </div>
         </div>
         <button class="est_reset" onclick="resetearTotalGeneral()">Resetear Total General</button>
     </div>

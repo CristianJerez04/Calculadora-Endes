@@ -10,7 +10,20 @@ function actualizarTotalCosteGeneral() {
     });
 
     totalCosteGeneral = totalHabitaciones;
-    document.getElementById("totalCoste").textContent = `Total General: ${totalCosteGeneral.toFixed(2)}€`;
+    document.getElementById("totalCoste").textContent = `Base imponible: ${totalCosteGeneral.toFixed(2)}€`;
+    actualizarIva();
+    actualizarTotalConIva();
+}
+
+function actualizarIva() {
+    const iva = totalCosteGeneral * 0.21;
+    document.getElementById("ivaCoste").textContent = `IVA (21%): ${iva.toFixed(2)}€`;
+}
+
+function actualizarTotalConIva() {
+    const iva = totalCosteGeneral * 0.21;
+    const totalConIva = totalCosteGeneral + iva;
+    document.getElementById("totalConIva").textContent = `Total con IVA repercutido: ${totalConIva.toFixed(2)}€`;
 }
 
 function actualizarTotalCosteHabitacion(id) {
@@ -55,7 +68,6 @@ function agregarHabitacion() {
             </thead>
             <tbody></tbody>
         </table>
-        <!-- Añadido aquí el elemento para mostrar el coste total por habitación -->
         <div id="totalCosteHabitacion${id}" class="total-coste-habitacion">Total: 0.00€</div>
     `;
     contenedor.appendChild(div);
@@ -77,7 +89,7 @@ function agregarElectrodomestico(id) {
         <td>${potencia}</td>
         <td class="tiempo">0s</td>
         <td class="coste">0.00€</td>
-        <td><button class="secboton toggle">On</button> <button class="secboton eliminar">Eliminar</button></td>
+        <td><button class="secboton toggle">On</button> <button class="secboton eliminar">Delete</button></td>
     `;
 
     const botonToggle = fila.querySelector(".toggle");
@@ -116,8 +128,9 @@ function agregarElectrodomestico(id) {
     tabla.appendChild(fila);
 }
 
-// Función para resetear solo el total general
 function resetearTotalGeneral() {
     totalCosteGeneral = 0;
     document.getElementById("totalCoste").textContent = `Importe Total Facturación: 0.00 €`;
+    document.getElementById("ivaCoste").textContent = `IVA (21%): 0.00 €`;
+    document.getElementById("totalConIva").textContent = `Total con IVA: 0.00 €`;
 }
