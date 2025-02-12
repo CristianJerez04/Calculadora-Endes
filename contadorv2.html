@@ -11,7 +11,17 @@
 <body>
     <header class="main-header">
         <h1>Control de Electrodomésticos</h1>
-        <button class="est_cabecera" onclick="agregarHabitacion()">Agregar Habitación</button>
+        <select class="est_cabecera" id="seleccionarHabitacion" onchange="agregarHabitacion()">
+            <option value="">Selecciona una habitación</option>
+            <option value="salon">Salón</option>
+            <option value="cocina">Cocina</option>
+            <option value="baño">Baño</option>
+            <option value="dormitorio1">Dormitorio 1</option>
+            <option value="dormitorio2">Dormitorio 2</option>
+            <option value="patio">Patio</option>
+            <option value="guardilla">Guardilla</option>
+            <option value="sotano">Sótano</option>
+        </select>
     </header>
     <div class="main-content">
         <div id="habitaciones" class="habitaciones-container"></div>
