@@ -24,7 +24,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    max-width: 280px;
+    max-width: 290px;
     margin-top: 10px;
     font-size: 16px;
     letter-spacing: 2px;
@@ -127,7 +127,8 @@ h3 {
 }
 
 .input-field,
-.textarea-field {
+.textarea-field,
+.potencia-dropdown {
     width: calc(100% - 20px);
     padding: 8px;
     /* margin-bottom: 16px; */
@@ -163,8 +164,24 @@ h3 {
 
 }
 
+.eliminarhab {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.eliminarhab:hover {
+    background-color: #89f28c;
+}
+
+
 .submit-button:hover {
     background-color: #328936;
+    
 }
 
 .appliance-table {

@@ -1,4 +1,14 @@
+//Variable totalcoste general
+//Esta variable se utiliza para almacenar el coste total general de todas las habitaciones.
+
 let totalCosteGeneral = 0;
+
+
+
+//Función para actualizar costes
+//Esta función calcula el coste total de todas las habitaciones sumando los valores de las clases 
+//.total-coste-habitacion y actualiza el totalCosteGeneral. Luego, actualiza el texto de la base imponible 
+//y llama a las funciones para actualizar el IVA y el total con IVA.
 
 function actualizarTotalCosteGeneral() {
     let totalHabitaciones = 0;
@@ -15,16 +25,30 @@ function actualizarTotalCosteGeneral() {
     actualizarTotalConIva();
 }
 
+
+//Función para Actualizar iva
+//Esta función calcula el IVA (21%) sobre el totalCosteGeneral y 
+//actualiza el texto del IVA en el elemento con el ID ivaCoste.
+
 function actualizarIva() {
     const iva = totalCosteGeneral * 0.21;
     document.getElementById("ivaCoste").textContent = `IVA (21%): ${iva.toFixed(2)}€`;
 }
+
+//Función para actualizar el total con iva
+//Esta función calcula el total con IVA añadiendo el IVA al totalCosteGeneral y 
+//actualiza el texto en el elemento con el ID totalConIva.
 
 function actualizarTotalConIva() {
     const iva = totalCosteGeneral * 0.21;
     const totalConIva = totalCosteGeneral + iva;
     document.getElementById("totalConIva").textContent = `Total con IVA repercutido: ${totalConIva.toFixed(2)}€`;
 }
+
+//Función para actualizar el coste total de la habitación.
+//Esta función calcula el coste total de los electrodomésticos en una habitación específica 
+//sumando los valores de las celdas con la clase .coste y actualiza el texto del coste total 
+//de la habitación. Luego, llama a actualizarTotalCosteGeneral para actualizar el coste general.
 
 function actualizarTotalCosteHabitacion(id) {
     const totalElem = document.getElementById(`totalCosteHabitacion${id}`);
@@ -40,6 +64,11 @@ function actualizarTotalCosteHabitacion(id) {
     actualizarTotalCosteGeneral();
 }
 
+// Función para agregar habitaciones.
+// Esta función añade una nueva habitación a la lista de habitaciones. Crea dinámicamente un div con los elementos HTML necesarios, 
+// como el nombre de la habitación, un input para el precio kWh, un botón para añadir electrodomésticos y una tabla para listar los 
+// electrodomésticos. También agrega eventos para eliminar la habitación y actualizar el precio del kWh.
+
 function agregarHabitacion() {
     const habitacionSelect = document.getElementById("seleccionarHabitacion");
     const nombreHabitacion = habitacionSelect.options[habitacionSelect.selectedIndex].text;
@@ -54,11 +83,13 @@ function agregarHabitacion() {
     const id = document.querySelectorAll(".appliance-box").length + 1;
     const div = document.createElement("div");
     div.className = "appliance-box";
+    div.id = `habitacion${id}`; 
     div.innerHTML = `
         <h2>${nombreHabitacion}</h2>
-        <label class="texto">Precio kWh: <input class="input-field" type="number" step="0.01" id="precio${id}" value="0.15" min="0"></label>
+        <button class="eliminarhab">Eliminar habitación</button>
+        <label class="texto">Precio kWh: <input class="input-field precio-kwh" type="number" step="0.01" id="precio${id}" value="0.15" min="0"></label>
         <h3>Electrodomésticos</h3>
-        <button class="secboton" onclick="agregarElectrodomestico(${id})">Añadir Electrodoméstico</button>
+        <button class="secboton" onclick="agregarElectrodomestico(${id})">Añadir Electrodoméstico</button> 
         <input class="input-field" type="text" id="nombre${id}" placeholder="Nombre del electrodoméstico">
         <input class="input-field" type="number" id="potencia${id}" placeholder="Potencia (W)" step="0.01" min="0">
         <table class="appliance-table" id="tabla${id}">
@@ -80,12 +111,50 @@ function agregarHabitacion() {
     contenedor.appendChild(div);
     habitacionSelect.selectedIndex = 0; 
 
-   
     const nuevaTabla = document.getElementById(`tabla${id}`).querySelector('tbody');
     nuevaTabla.querySelectorAll('tr').forEach(fila => {
         addEventListenersToRow(fila, id);
     });
+
+    div.querySelector(".eliminarhab").addEventListener("click", function() {
+        eliminarHabitacion(id);
+    });
+
+    
+    const inputPrecioKwh = div.querySelector(".precio-kwh");
+    inputPrecioKwh.addEventListener("change", actualizarPreciosKwh);
 }
+
+//Función para actualizar el precio del kWh
+//Esta función actualiza el precio del kWh en todos los inputs cuando se cambia en uno de ellos. 
+//Luego, recalcula los costes de las habitaciones.
+
+function actualizarPreciosKwh(event) {
+    const nuevoPrecio = parseFloat(event.target.value) || 0;
+    const preciosKwh = document.querySelectorAll(".precio-kwh");
+
+    preciosKwh.forEach(input => {
+        input.value = nuevoPrecio.toFixed(2);
+    });
+
+    
+    document.querySelectorAll(".appliance-box").forEach((elem, id) => {
+        actualizarTotalCosteHabitacion(id + 1);
+    });
+}
+
+//Función para eliminar habitaciónes.
+//Esta función elimina una habitación de la lista de habitaciones y actualiza el coste total general.
+
+function eliminarHabitacion(id) {
+    const habitacion = document.getElementById(`habitacion${id}`);
+    habitacion.parentNode.removeChild(habitacion);
+    actualizarTotalCosteGeneral();
+}
+
+//Funcion para gestión de habitaciones y electrodomésticos
+//Esta función devuelve una cadena HTML que representa una tabla de electrodomésticos predefinidos 
+//para una habitación específica, incluyendo selectores de potencia, botones de control y campos de coste.
 
 function obtenerElectrodomesticosPredefinidos(habitacion, id) {
     const electrodomesticos = {
@@ -102,12 +171,12 @@ function obtenerElectrodomesticosPredefinidos(habitacion, id) {
         baño: [
             { nombre: "Toallero", potencias: [750, 1000, 1500] },
             { nombre: "Termo", potencias: [1500, 2000, 2500] },
-            { nombre: "Lampara", potencias: [60, 75, 100] }
+            { nombre: "Lámpara", potencias: [60, 75, 100] }
         ],
         dormitorio1: [
             { nombre: "Climatizador", potencias: [1000, 1500, 2000] },
             { nombre: "Ventilador", potencias: [50, 75, 100] },
-            { nombre: "Lampara", potencias: [50, 70, 90] }
+            { nombre: "Lámpara", potencias: [50, 70, 90] }
         ],
          dormitorio2: [
             { nombre: "Portatil", potencias: [45, 60, 75] },
@@ -115,19 +184,19 @@ function obtenerElectrodomesticosPredefinidos(habitacion, id) {
             { nombre: "Calefactor", potencias: [750, 1000, 1500] }
         ],
         patio: [
-            { nombre: "Parrilla electrica", potencias: [1000, 1500, 2000] },
+            { nombre: "Parrilla eléctrica", potencias: [1000, 1500, 2000] },
             { nombre: "Calefactor", potencias: [800, 1200, 1500] },
-            { nombre: "Luces Jardin", potencias: [10, 20, 30] }
+            { nombre: "Luces Jardín", potencias: [10, 20, 30] }
         ],
         guardilla: [
             { nombre: "Deshumidificador", potencias: [200, 300, 400] },
             { nombre: "Ventilador techo", potencias: [50, 75, 100] },
-            { nombre: "Calefactor portatil", potencias: [500, 1000, 1500] }
+            { nombre: "Calefactor portátil", potencias: [500, 1000, 1500] }
         ],
         sotano: [
             { nombre: "Deshumidificador", potencias: [200, 300, 400] },
             { nombre: "Congelador", potencias: [300, 400, 500] },
-            { nombre: "Lampara de Pie", potencias: [50, 70, 80] }
+            { nombre: "Lámpara de Pie", potencias: [50, 70, 80] }
         ],
         
     };
@@ -152,6 +221,12 @@ function obtenerElectrodomesticosPredefinidos(habitacion, id) {
         </tr>
     `).join('');
 }
+
+
+//Función para agregar nuevos electrodomesticos
+//Esta función añade un nuevo electrodoméstico a la tabla de una habitación específica, 
+//incluyendo validaciones para el nombre y la potencia, y llama a addEventListenersToRow para añadir eventos a los botones.
+
 function agregarElectrodomestico(id) {
     const nombre = document.getElementById(`nombre${id}`).value;
     const potencia = parseFloat(document.getElementById(`potencia${id}`).value);
@@ -187,6 +262,16 @@ function agregarElectrodomestico(id) {
     tabla.appendChild(fila);
     actualizarTotalCosteHabitacion(id);
 }
+
+
+//Función para crear eventos
+//Esta parte del código añade eventos a los botones de las filas:
+
+// Botón Toggle (botonToggle): Activa o desactiva el encendido del electrodoméstico, actualiza el tiempo de encendido y el coste.
+
+// Botón Acelerar (botonAcelerar): Aumenta la velocidad del tiempo de encendido (simulando un paso rápido del tiempo).
+
+// Botón Eliminar (botonEliminar): Elimina la fila del electrodoméstico y actualiza el coste total de la habitación.
 
 function addEventListenersToRow(fila, id) {
     let encendido = false;
@@ -270,6 +355,10 @@ function addEventListenersToRow(fila, id) {
     });
 }
 
+//Función para resetear el total general
+//Esta función restablece el totalCosteGeneral a 0 y actualiza los textos del importe total,
+//IVA y total con IVA en los respectivos elementos.
+
 function resetearTotalGeneral() {
     totalCosteGeneral = 0;
     document.getElementById("totalCoste").textContent = `Importe Total Facturación: 0.00 €`;
@@ -282,3 +371,24 @@ document.querySelectorAll('tbody tr').forEach(fila => {
     const id = fila.closest('table').id.replace('tabla', '');
     addEventListenersToRow(fila, id);
 });
+
+
+// 1. totalCosteGeneral: Variable para almacenar el coste total general.
+
+// 2. actualizarTotalCosteGeneral: Función para calcular y actualizar el coste total de todas las habitaciones.
+
+// 3. actualizarIva: Función para calcular y actualizar el IVA.
+
+// 4. actualizarTotalConIva: Función para calcular y actualizar el total con IVA.
+
+// 5. actualizarTotalCosteHabitacion: Función para calcular y actualizar el coste total de una habitación específica.
+
+// 6. obtenerElectrodomesticosPredefinidos: Función para obtener los electrodomésticos predefinidos de una habitación.
+
+// 7. agregarElectrodomestico: Función para añadir un nuevo electrodoméstico a una tabla de habitación.
+
+// 8. addEventListenersToRow: Función para añadir eventos a los botones de una fila de electrodoméstico.
+
+// 9. resetearTotalGeneral: Función para resetear el total general a 0.
+
+// 10. Inicialización de Eventos: Código para inicializar los eventos en las filas existentes de las tablas.
